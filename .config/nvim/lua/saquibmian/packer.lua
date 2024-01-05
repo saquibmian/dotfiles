@@ -5,9 +5,10 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
 
-	-- Packer can manage itself
+  -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  -- Themes
   use 'HUAHUAI23/nvim-quietlight'
   use 'martinsione/darkplus.nvim'
 

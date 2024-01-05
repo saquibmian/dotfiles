@@ -1,0 +1,84 @@
+# local configuration for git, referenced in .config/git/config
+/.config/git/local_config
+# written to by fish's set_kitty_theme function's invocation of `kitty +kitten themes`
+/.config/kitty/themes.conf.bak
+
+# contains sensitive information
+/.netrc
+# npm configuration - can contain sensitive information
+/.npmrc
+/.yarnrc
+
+# data files for various programs
+/.aspnet
+/.bun
+/.cache
+/.cups
+/.dlv
+/.local
+/.npm
+/.nuget
+/.m2
+/.mono
+/.docker
+/.cargo
+/.rustup
+/.redhat
+/.dotnet
+/.terminfo
+/.jump
+/.ssh
+/.terminfo
+/.viminfo
+/.bash_history
+/.zsh_history
+/.clojure_history
+/.python_history
+/.sqlite_history
+/.lesshst
+/.node_repl_history
+
+/.rest-client
+/.templateengine
+/.zsh_sessions
+
+# Oh My ZSH install
+/.oh-my-zsh
+
+# vscode install
+/.vscode
+
+# macOS file
+/.CFUserTextEncoding
+
+# generated / local fish files
+/.config/fish/fish_variables
+/.config/fish/conf.d
+/.config/fish/completions
+
+# macOS trash directory
+/.Trash
+
+# macOS default directories
+/Applications/
+/Desktop/
+/Documents/
+/Downloads/
+/Library/
+/Movies/
+/Music/
+/Pictures/
+/Public/
+
+# created by `brew bundle --global`
+#
+# > As it can contain local environment information that varies between
+# > systems, it's not worth committing to version control on multi-user
+# > repositories.
+# https://github.com/homebrew/homebrew-bundle#versions-and-lockfiles
+/.Brewfile.lock.json
+
+# Default go directory, for installed binaries and pkg downloads
+/go/
+# Directory for code
+/dev/

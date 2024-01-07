@@ -204,6 +204,26 @@ require("lazy").setup({
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		config = function()
+			require("toggleterm").setup({
+				open_mapping = "\\t",
+				direction = "float",
+			})
+		end,
+	},
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = true,
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = true,
+	},
 })
 
 local lsp_zero = require("lsp-zero")

@@ -93,13 +93,6 @@ require("lazy").setup({
 				end,
 				mode = "n",
 			},
-			{
-				"<leader>wd",
-				function()
-					require("telescope.builtin").diagnostics()
-				end,
-				mode = "n",
-			},
 		},
 	},
 	"nvim-tree/nvim-web-devicons",
@@ -187,7 +180,7 @@ require("lazy").setup({
 			formatters_by_ft = {
 				buf = { "buf" },
 				fish = { "fish_indent" },
-				go = { "gofmt" },
+				go = { "gopls" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				javascript = { { "prettierd", "prettier" } },
@@ -218,6 +211,22 @@ require("lazy").setup({
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = true,
+        keys = {
+			{
+				"<leader>dd",
+				function()
+					require("trouble").toggle("document_diagnostics")
+				end,
+				mode = "n",
+			},
+			{
+				"<leader>wd",
+				function()
+					require("trouble").toggle("workspace_diagnostics")
+				end,
+				mode = "n",
+			},
+        },
 	},
 	{
 		"folke/todo-comments.nvim",
@@ -233,14 +242,14 @@ lsp_zero.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "gd", function()
 		vim.lsp.buf.definition()
 	end, opts)
+    vim.keymap.set("n", "gR", function() 
+        require("trouble").toggle("lsp_references") 
+    end, opts)
+    vim.keymap.set("n", "gi", function() 
+        require("trouble").toggle("lsp_definitions") 
+    end, opts)
 	vim.keymap.set("n", "K", function()
 		vim.lsp.buf.hover()
-	end, opts)
-	vim.keymap.set("n", "<leader>vws", function()
-		vim.lsp.buf.workspace_symbol()
-	end, opts)
-	vim.keymap.set("n", "<leader>vd", function()
-		vim.diagnostic.open_float()
 	end, opts)
 	vim.keymap.set("n", "[d", function()
 		vim.diagnostic.goto_next()
@@ -248,13 +257,10 @@ lsp_zero.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "]d", function()
 		vim.diagnostic.goto_prev()
 	end, opts)
-	vim.keymap.set("n", "<leader>vca", function()
+	vim.keymap.set("n", "<C-.>", function()
 		vim.lsp.buf.code_action()
 	end, opts)
-	vim.keymap.set("n", "<leader>vrr", function()
-		vim.lsp.buf.references()
-	end, opts)
-	vim.keymap.set("n", "<leader>vrn", function()
+	vim.keymap.set("n", "<F2>", function()
 		vim.lsp.buf.rename()
 	end, opts)
 	vim.keymap.set("i", "<C-h>", function()
@@ -288,7 +294,7 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 		["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-		["<C-y>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
 		["<C-Space>"] = cmp.mapping.complete(),
 	}),
 })

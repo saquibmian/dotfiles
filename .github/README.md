@@ -7,7 +7,7 @@
 ```console
 $ cd ~
 $ git init
-$ git remote add origin https://github.com/stefanvanburen/dotfiles
+$ git remote add origin https://github.com/saquibmian/dotfiles
 $ git fetch
 $ git checkout -f main
 $ git config status.showUntrackedFiles no
@@ -30,16 +30,10 @@ brew bundle install --global
 [Set the default shell for the user to `fish`](https://fishshell.com/docs/current/index.html#default-shell):
 
 ```sh
-# NOTE: Should ensure that "$(command -v fish)" is in /etc/shells
-# See: https://github.com/fish-shell/fish-shell/issues/989
+# Ensure that "$(command -v fish)" is in /etc/shells
+echo -s $(command -v fish) | sudo tee -a /etc/shells
 chsh -s $(command -v fish)
 ```
 
 Set up fonts in Kitty (see [kitty.conf](/.config/kitty/kitty.conf) for details)
-
-Disable the annoying <kbd>Cmd</kbd>+<kbd>Ctrl</kbd>+<kbd>D</kbd> shortcut to bring up the dictionary on macOS, so that [Dash.app](https://kapeli.com/dash) can use it:
-
-```sh
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 70 '<dict><key>enabled</key><false/></dict>'
-```
 

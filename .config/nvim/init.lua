@@ -28,6 +28,12 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "120"
 
+-- Working with split windows
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>')
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>')
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>')
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>')
+
 function DarkMode()
 	vim.api.nvim_set_option("background", "dark")
 	vim.cmd([[colorscheme darkplus]])

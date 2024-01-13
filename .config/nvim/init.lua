@@ -15,9 +15,9 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.opt.nu = true
 vim.opt.relativenumber = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
@@ -211,7 +211,7 @@ require("lazy").setup({
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = true,
-        keys = {
+		keys = {
 			{
 				"<leader>dd",
 				function()
@@ -226,7 +226,7 @@ require("lazy").setup({
 				end,
 				mode = "n",
 			},
-        },
+		},
 	},
 	{
 		"folke/todo-comments.nvim",
@@ -242,12 +242,12 @@ lsp_zero.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "gd", function()
 		vim.lsp.buf.definition()
 	end, opts)
-    vim.keymap.set("n", "gR", function() 
-        require("trouble").toggle("lsp_references") 
-    end, opts)
-    vim.keymap.set("n", "gi", function() 
-        require("trouble").toggle("lsp_definitions") 
-    end, opts)
+	vim.keymap.set("n", "gR", function()
+		require("trouble").toggle("lsp_references")
+	end, opts)
+	vim.keymap.set("n", "gi", function()
+		require("trouble").toggle("lsp_definitions")
+	end, opts)
 	vim.keymap.set("n", "K", function()
 		vim.lsp.buf.hover()
 	end, opts)
@@ -270,7 +270,14 @@ end)
 
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	ensure_installed = { "gopls", "tsserver", "rust_analyzer", "omnisharp" },
+	ensure_installed = {
+		"html",
+		"gopls",
+		"tsserver",
+		"rust_analyzer",
+		"omnisharp",
+		"svelte",
+	},
 	handlers = {
 		lsp_zero.default_setup,
 		lua_ls = function()

@@ -91,6 +91,7 @@ require("lazy").setup({
 					require("telescope.builtin").find_files()
 				end,
 				mode = "n",
+        desc = "Open fuzzy file finder in Telescope",
 			},
 			{
 				"<leader>fb",
@@ -98,7 +99,16 @@ require("lazy").setup({
 					require("telescope.builtin").buffers()
 				end,
 				mode = "n",
+        desc = "Open buffers list in Telescope",
 			},
+      {
+        "<S-D-f>",
+        function()
+          require("telescope.builtin").live_grep()
+        end,
+        mode = "n",
+        desc = "Search across the workspace in Telescope",
+      },
 		},
 	},
 	"nvim-tree/nvim-web-devicons",
@@ -110,9 +120,10 @@ require("lazy").setup({
 			{
 				"<leader>pv",
 				function()
-					vim.cmd.NvimTreeFocus()
+					vim.cmd.NvimTreeToggle()
 				end,
 				mode = "n",
+        desc = "Toggle NvimTree",
 			},
 		},
 		config = function()
@@ -179,7 +190,7 @@ require("lazy").setup({
 					require("conform").format({ async = false, lsp_fallback = true })
 				end,
 				mode = "",
-				desc = "Format buffer",
+				desc = "Format buffer via LSP",
 			},
 		},
 		opts = {
@@ -206,12 +217,11 @@ require("lazy").setup({
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
-		config = function()
-			require("toggleterm").setup({
+    opts = {
 				open_mapping = "\\t",
 				direction = "float",
-			})
-		end,
+    },
+    config = true,
 	},
 	{
 		"folke/trouble.nvim",
@@ -224,6 +234,7 @@ require("lazy").setup({
 					require("trouble").toggle("document_diagnostics")
 				end,
 				mode = "n",
+        desc = "Show document diagnostics in Trouble",
 			},
 			{
 				"<leader>wd",
@@ -231,6 +242,7 @@ require("lazy").setup({
 					require("trouble").toggle("workspace_diagnostics")
 				end,
 				mode = "n",
+        desc = "Show workspace diagnostics in Trouble",
 			},
 		},
 	},
@@ -239,6 +251,10 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = true,
 	},
+  {
+    'ruifm/gitlinker.nvim',
+    config = true,
+  },
 })
 
 local lsp_zero = require("lsp-zero")
@@ -258,10 +274,10 @@ lsp_zero.on_attach(function(client, bufnr)
 		vim.lsp.buf.hover()
 	end, opts)
 	vim.keymap.set("n", "[d", function()
-		vim.diagnostic.goto_next()
+		vim.diagnostic.goto_prev()
 	end, opts)
 	vim.keymap.set("n", "]d", function()
-		vim.diagnostic.goto_prev()
+		vim.diagnostic.goto_next()
 	end, opts)
 	vim.keymap.set("n", "<C-.>", function()
 		vim.lsp.buf.code_action()
@@ -277,6 +293,7 @@ end)
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = {
+    "bufls",
 		"html",
 		"gopls",
 		"tsserver",

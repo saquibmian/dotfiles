@@ -1,3 +1,4 @@
+-- I use the Lazy.nvim package manager. It provides the most flexibile and sane default behaviour.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -11,67 +12,81 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Sets
-vim.g.mapleader = " "
-vim.opt.nu = true
-vim.opt.relativenumber = true
+-- These are my personal VIM options.
+vim.g.mapleader = " " -- Override the leader from <\> to <Space>. This can cause some issues, but so far I like it.
+vim.opt.nu = true -- Enable line numbers
+vim.opt.relativenumber = true -- Enable relative line numbers.
+-- All 4 of these options are set together. For your sanity, the first three should match.
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+-- Highlight searches as I'm typing, and preview replacements.
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
-vim.opt.wrap = false
-vim.opt.scrolloff = 8
+vim.opt.wrap = false -- Disable wordwrap.
+vim.opt.scrolloff = 8 -- Ensure there are always 8 free lines at the bottom of the buffer window.
 vim.opt.signcolumn = "yes"
-vim.opt.updatetime = 50
+vim.opt.updatetime = 50 -- I want fast updates.
+-- Show a vertical line at the 120 character mark, to help align text.
+-- TODO: I do _not_ set textwidth, it doesn't make sense for code, but I should consider setting it for certain
+-- filetypes, like markdown and latex.
 vim.opt.colorcolumn = "120"
 
--- Working with split windows
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>')
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>')
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>')
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>')
+-- These keymaps make working with split windows easier.
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>")
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>")
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
 
+-- DarkMode switches my theme to darkmode.
 function DarkMode()
 	vim.api.nvim_set_option("background", "dark")
 	vim.cmd([[colorscheme darkplus]])
 end
 
+-- LightMode switches my theme to lightmode.
 function LightMode()
 	vim.api.nvim_set_option("background", "light")
 	vim.cmd([[colorscheme quietlight]])
 end
 
+-- These are my plugins.
+-- TODO: Move these out to a modular structure under `plugins`.
 require("lazy").setup({
 	{
+		-- My main light theme.
 		"HUAHUAI23/nvim-quietlight",
 		lazy = false,
-		priority = 1000,
+		priority = 1000, -- Themes should not be lazy.
 		init = function()
+			-- Set this as my current theme.
 			-- TODO: there must be better way to do this
 			LightMode()
 		end,
 	},
 	{
+		-- My main dark theme. I don't particularly like it, I want to place with rosepine.
 		"martinsione/darkplus.nvim",
 		priority = 1000,
-		lazy = false,
+		lazy = false, -- Themes should not be lazy.
 	},
 	{
+		-- auto-dark-mode automatically switches themes based on the OS light/dark mode setting.
+		-- It will pool for updates every second.
 		"f-person/auto-dark-mode.nvim",
 		config = {
 			update_interval = 1000,
 			set_dark_mode = function()
-				print("going dark")
+				-- Guard against going to the same theme. This is really just a hack around plugin order.
 				local current = vim.api.nvim_get_option("background")
 				if current == "light" then
 					DarkMode()
 				end
 			end,
 			set_light_mode = function()
-				print("going light")
+				-- Guard against going to the same theme. This is really just a hack around plugin order.
 				local current = vim.api.nvim_get_option("background")
 				if current == "dark" then
 					LightMode()
@@ -80,9 +95,11 @@ require("lazy").setup({
 		},
 	},
 	{
+		-- Telescope is a fuzzy file finder, and also provides some helpful tools, like live_grep.
+		-- It's seriously amazing.
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		version = false,
+		version = false, -- The latest released version is no good, it's very old. Choose latest main.
 		dependencies = { "nvim-lua/plenary.nvim" },
 		keys = {
 			{
@@ -91,7 +108,7 @@ require("lazy").setup({
 					require("telescope.builtin").find_files()
 				end,
 				mode = "n",
-        desc = "Open fuzzy file finder in Telescope",
+				desc = "Open fuzzy file finder in Telescope",
 			},
 			{
 				"<leader>fb",
@@ -99,20 +116,24 @@ require("lazy").setup({
 					require("telescope.builtin").buffers()
 				end,
 				mode = "n",
-        desc = "Open buffers list in Telescope",
+				desc = "Open buffers list in Telescope",
 			},
-      {
-        "<S-D-f>",
-        function()
-          require("telescope.builtin").live_grep()
-        end,
-        mode = "n",
-        desc = "Search across the workspace in Telescope",
-      },
+			{
+				"<S-D-f>",
+				function()
+					require("telescope.builtin").live_grep()
+				end,
+				mode = "n",
+				desc = "Search across the workspace in Telescope",
+			},
 		},
 	},
-	"nvim-tree/nvim-web-devicons",
 	{
+		-- File icons :)
+		"nvim-tree/nvim-web-devicons",
+	},
+	{
+		-- My main file tree. Shows the file tree, but can also toggle showing open buffers by <S-b>.
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -123,7 +144,7 @@ require("lazy").setup({
 					vim.cmd.NvimTreeToggle()
 				end,
 				mode = "n",
-        desc = "Toggle NvimTree",
+				desc = "Toggle NvimTree",
 			},
 		},
 		config = function()
@@ -149,6 +170,9 @@ require("lazy").setup({
 		end,
 	},
 	{
+		-- Treesitter is a very performant code parser with plugins for many languages. It helps with semantic
+		-- colourization of your theme.
+		-- NOTE: This is _not_ language server support. See the next set of plugins for that.
 		"nvim-treesitter/nvim-treesitter",
 		version = false, -- latest released version is too old
 		build = function()
@@ -158,6 +182,9 @@ require("lazy").setup({
 		config = function()
 			local configs = require("nvim-treesitter.configs")
 			configs.setup({
+				-- These are the language types that I require to be installed by default. Otherwise, I've enabled auto_install,
+				-- which will install other treesitter plugins on the fly when a certain filetype is opened.
+				-- The first 6 are required.
 				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "javascript", "typescript", "go" },
 				sync_install = false,
 				auto_install = true,
@@ -172,6 +199,8 @@ require("lazy").setup({
 			})
 		end,
 	},
+	-- The following plugins are required for LSP support. See the docs on lsp-zero if you care about how this works.
+	-- I am using lsp-zero because it comes with a bunch of OOTB configurations and mappings.
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 	{ "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
@@ -180,19 +209,12 @@ require("lazy").setup({
 	{ "hrsh7th/nvim-cmp" },
 	{ "L3MON4D3/LuaSnip" },
 	{
+		-- Some LSPs have builtin formatting, but Conform overrides all of them with much better support for formatting.
+		-- For example, you can use prettier instead of the LSP. It can also automatically hook into on_save events and
+		-- optionally fallback to the LSP.
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
-		keys = {
-			{
-				"<leader>f",
-				function()
-					require("conform").format({ async = false, lsp_fallback = true })
-				end,
-				mode = "",
-				desc = "Format buffer via LSP",
-			},
-		},
 		opts = {
 			formatters_by_ft = {
 				buf = { "buf" },
@@ -203,7 +225,8 @@ require("lazy").setup({
 				javascript = { { "prettierd", "prettier" } },
 				sql = { "pg_format" },
 			},
-			format_on_save = { timeout_ms = 500, lsp_fallback = true },
+			-- Async false is the default, but set this explicitly because async will make your life very hard.
+			format_on_save = { async = false, timeout_ms = 500, lsp_fallback = true },
 			formatters = {
 				shfmt = {
 					prepend_args = { "-i", "2" },
@@ -211,19 +234,22 @@ require("lazy").setup({
 			},
 		},
 		init = function()
+			-- This hooks into formatting via VIM's default <=> keybinding.
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
 	{
+		-- ToggleTerm opens a terminal in a floating window.
 		"akinsho/toggleterm.nvim",
 		version = "*",
-    opts = {
-				open_mapping = "\\t",
-				direction = "float",
-    },
-    config = true,
+		opts = {
+			open_mapping = "\\t",
+			direction = "float",
+		},
+		config = true,
 	},
 	{
+		-- Trouble shows diagnostics in a nice UI. It also integrates nicely with TodoComments and Telescope.
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = true,
@@ -234,7 +260,7 @@ require("lazy").setup({
 					require("trouble").toggle("document_diagnostics")
 				end,
 				mode = "n",
-        desc = "Show document diagnostics in Trouble",
+				desc = "Show document diagnostics in Trouble",
 			},
 			{
 				"<leader>wd",
@@ -242,21 +268,27 @@ require("lazy").setup({
 					require("trouble").toggle("workspace_diagnostics")
 				end,
 				mode = "n",
-        desc = "Show workspace diagnostics in Trouble",
+				desc = "Show workspace diagnostics in Trouble",
 			},
 		},
 	},
 	{
+		-- TodoComments highlights TODO, FIXME, WARN, and BUG comments in different colours.
+		-- It also integrates with Trouble to browse these comments workspace-wide.
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = true,
 	},
-  {
-    'ruifm/gitlinker.nvim',
-    config = true,
-  },
+	{
+		-- GitLinker adds a keymap to generate VCS links to GitHub/BitBucket/etc. for the highlighted lines.
+		-- The keymap is <leader>gy.
+		"ruifm/gitlinker.nvim",
+		config = true,
+	},
 })
 
+-- The configuration for lsp-zero, LSP servers, and autocomplete mappings. See the docs for lsp-zero for more
+-- information about what's going on here.
 local lsp_zero = require("lsp-zero")
 lsp_zero.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
@@ -289,11 +321,10 @@ lsp_zero.on_attach(function(client, bufnr)
 		vim.lsp.buf.signature_help()
 	end, opts)
 end)
-
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = {
-    "bufls",
+		"bufls",
 		"html",
 		"gopls",
 		"tsserver",
@@ -309,7 +340,6 @@ require("mason-lspconfig").setup({
 		end,
 	},
 })
-
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({

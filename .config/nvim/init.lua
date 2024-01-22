@@ -101,6 +101,16 @@ require("lazy").setup({
 		cmd = "Telescope",
 		version = false, -- The latest released version is no good, it's very old. Choose latest main.
 		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			defaults = {
+				layout_strategy = "vertical",
+				layout_config = {
+					prompt_position = "top",
+					mirror = true,
+					preview_height = 0.70,
+				},
+			},
+		},
 		keys = {
 			{
 				"<leader>ff",

@@ -295,6 +295,10 @@ require("lazy").setup({
 		"ruifm/gitlinker.nvim",
 		config = true,
 	},
+  {
+    "tpope/vim-fugitive",
+    cmd = "Git"
+  },
 })
 
 -- The configuration for lsp-zero, LSP servers, and autocomplete mappings. See the docs for lsp-zero for more
@@ -310,7 +314,7 @@ lsp_zero.on_attach(function(client, bufnr)
 		require("trouble").toggle("lsp_references")
 	end, opts)
 	vim.keymap.set("n", "gi", function()
-		require("trouble").toggle("lsp_definitions")
+		require("trouble").toggle("lsp_implementations")
 	end, opts)
 	vim.keymap.set("n", "K", function()
 		vim.lsp.buf.hover()

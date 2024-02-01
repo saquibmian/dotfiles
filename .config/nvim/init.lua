@@ -43,7 +43,7 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
 -- DarkMode switches my theme to darkmode.
 function DarkMode()
 	vim.api.nvim_set_option("background", "dark")
-	vim.cmd([[colorscheme darkplus]])
+	vim.cmd([[colorscheme vscode]])
 end
 
 -- LightMode switches my theme to lightmode.
@@ -61,7 +61,7 @@ require("lazy").setup({
 		lazy = false,
 		priority = 1000, -- Themes should not be lazy.
 		init = function()
-			-- Set this as my current theme.
+			-- Set this as my current theme. This and the `after` config are require due to a timing issue with NvimTree.
 			-- TODO: there must be better way to do this
 			LightMode()
 		end,
@@ -72,28 +72,7 @@ require("lazy").setup({
 		priority = 1000,
 		lazy = false, -- Themes should not be lazy.
 	},
-	{
-		-- auto-dark-mode automatically switches themes based on the OS light/dark mode setting.
-		-- It will pool for updates every second.
-		"f-person/auto-dark-mode.nvim",
-		config = {
-			update_interval = 1000,
-			set_dark_mode = function()
-				-- Guard against going to the same theme. This is really just a hack around plugin order.
-				local current = vim.api.nvim_get_option("background")
-				if current == "light" then
-					DarkMode()
-				end
-			end,
-			set_light_mode = function()
-				-- Guard against going to the same theme. This is really just a hack around plugin order.
-				local current = vim.api.nvim_get_option("background")
-				if current == "dark" then
-					LightMode()
-				end
-			end,
-		},
-	},
+  { 'Mofiqul/vscode.nvim', lazy = false, priority = 1000 },
 	{
 		-- Telescope is a fuzzy file finder, and also provides some helpful tools, like live_grep.
 		-- It's seriously amazing.
@@ -298,6 +277,9 @@ require("lazy").setup({
   {
     "tpope/vim-fugitive",
     cmd = "Git"
+  },
+  {
+    "RRethy/vim-illuminate",
   },
 })
 

@@ -257,7 +257,7 @@ require("lazy").setup({
 			{
 				"<leader>dd",
 				function()
-					require("trouble").toggle("document_diagnostics")
+					require("trouble").open("document_diagnostics")
 				end,
 				mode = "n",
 				desc = "Show document diagnostics in Trouble",
@@ -265,7 +265,7 @@ require("lazy").setup({
 			{
 				"<leader>wd",
 				function()
-					require("trouble").toggle("workspace_diagnostics")
+					require("trouble").open("workspace_diagnostics")
 				end,
 				mode = "n",
 				desc = "Show workspace diagnostics in Trouble",
@@ -277,7 +277,15 @@ require("lazy").setup({
 		-- It also integrates with Trouble to browse these comments workspace-wide.
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = true,
+		config = {
+			highlight = {
+				-- Override the pattern to allow highlighting TODOs in the style below:
+				-- TODO(foo): hello
+				-- ^^^^ is highlighted
+				keyword = "bg",
+				pattern = [[.*<(KEYWORDS)\s*(\(.*\))?:]],
+			},
+		},
 	},
 	{
 		-- GitLinker adds a keymap to generate VCS links to GitHub/BitBucket/etc. for the highlighted lines.

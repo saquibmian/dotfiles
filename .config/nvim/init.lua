@@ -30,9 +30,8 @@ vim.opt.scrolloff = 8 -- Ensure there are always 8 free lines at the bottom of t
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50 -- I want fast updates.
 -- Show a vertical line at the 120 character mark, to help align text.
--- TODO: I do _not_ set textwidth, it doesn't make sense for code, but I should consider setting it for certain
--- filetypes, like markdown and latex.
 vim.opt.colorcolumn = "120"
+-- NOTE: Check `after/ftplugin` for options specific to filetypes.
 
 -- These keymaps make working with split windows easier.
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>")
@@ -76,7 +75,7 @@ require("lazy").setup({
 		priority = 1000,
 		lazy = false, -- Themes should not be lazy.
 	},
-  { 'Mofiqul/vscode.nvim', lazy = false, priority = 1000 },
+	{ "Mofiqul/vscode.nvim", lazy = false, priority = 1000 },
 	{
 		-- Telescope is a fuzzy file finder, and also provides some helpful tools, like live_grep.
 		-- It's seriously amazing.
@@ -88,8 +87,6 @@ require("lazy").setup({
 			defaults = {
 				layout_strategy = "vertical",
 				layout_config = {
-					prompt_position = "top",
-					mirror = true,
 					preview_height = 0.70,
 				},
 			},
@@ -178,7 +175,17 @@ require("lazy").setup({
 				-- These are the language types that I require to be installed by default. Otherwise, I've enabled auto_install,
 				-- which will install other treesitter plugins on the fly when a certain filetype is opened.
 				-- The first 6 are required.
-				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "javascript", "typescript", "go" },
+				ensure_installed = {
+					"c",
+					"lua",
+					"vim",
+					"vimdoc",
+					"query",
+					"rust",
+					"javascript",
+					"typescript",
+					"go",
+				},
 				sync_install = false,
 				auto_install = true,
 				highlight = {
@@ -210,7 +217,7 @@ require("lazy").setup({
 		cmd = { "ConformInfo" },
 		opts = {
 			formatters_by_ft = {
-				buf = { "buf" },
+				proto = { "buf" },
 				fish = { "fish_indent" },
 				go = { "gopls" },
 				lua = { "stylua" },
@@ -278,13 +285,39 @@ require("lazy").setup({
 		"ruifm/gitlinker.nvim",
 		config = true,
 	},
-  {
-    "tpope/vim-fugitive",
-    cmd = "Git"
-  },
-  {
-    "RRethy/vim-illuminate",
-  },
+	{
+		"tpope/vim-fugitive",
+		cmd = "Git",
+	},
+	{
+		"RRethy/vim-illuminate",
+		init = function()
+			-- This is configure, not setup, so opts doesn't work
+			require("illuminate").configure({
+				filetypes_denylist = {
+					"Outline",
+					"NvimTree",
+					"Glance",
+				},
+			})
+		end,
+	},
+	{
+		"hedyhli/outline.nvim",
+		lazy = true,
+		cmd = { "Outline", "OutlineOpen" },
+		keys = {
+			{ "<leader>o", "<cmd>Outline<cr>", desc = "Toggle Outline" },
+		},
+		opts = {
+			-- filter.default = { "Package", "Module", "Function", "Constant" },
+		},
+		config = true,
+	},
+	{
+		"dnlhc/glance.nvim",
+		config = true,
+	},
 })
 
 -- The configuration for lsp-zero, LSP servers, and autocomplete mappings. See the docs for lsp-zero for more
@@ -294,30 +327,42 @@ lsp_zero.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
 	vim.keymap.set("n", "gd", function()
+		-- go to definition
 		vim.lsp.buf.definition()
 	end, opts)
-	vim.keymap.set("n", "gR", function()
+	vim.keymap.set("n", "<leader>fr", function()
+		-- find all references
 		require("trouble").toggle("lsp_references")
 	end, opts)
-	vim.keymap.set("n", "gi", function()
+	vim.keymap.set("n", "<leader>fi", function()
+		-- Find all implementations
 		require("trouble").toggle("lsp_implementations")
 	end, opts)
+	vim.keymap.set("n", "gD", "<CMD>Glance definitions<CR>")
+	vim.keymap.set("n", "gR", "<CMD>Glance references<CR>")
+	vim.keymap.set("n", "gI", "<CMD>Glance implementations<CR>")
 	vim.keymap.set("n", "K", function()
+		-- Hover definition
 		vim.lsp.buf.hover()
 	end, opts)
 	vim.keymap.set("n", "[d", function()
+		-- Go to previous error
 		vim.diagnostic.goto_prev()
 	end, opts)
 	vim.keymap.set("n", "]d", function()
+		-- Go to next error
 		vim.diagnostic.goto_next()
 	end, opts)
 	vim.keymap.set("n", "<C-.>", function()
+		-- Trigger code actions
 		vim.lsp.buf.code_action()
 	end, opts)
 	vim.keymap.set("n", "<F2>", function()
+		-- Rename symbol
 		vim.lsp.buf.rename()
 	end, opts)
 	vim.keymap.set("i", "<C-h>", function()
+		-- Hover signature help
 		vim.lsp.buf.signature_help()
 	end, opts)
 end)

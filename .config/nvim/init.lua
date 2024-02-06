@@ -75,7 +75,55 @@ require("lazy").setup({
 		priority = 1000,
 		lazy = false, -- Themes should not be lazy.
 	},
-	{ "Mofiqul/vscode.nvim", lazy = false, priority = 1000 },
+	{
+		"Mofiqul/vscode.nvim",
+		lazy = false, -- Themes should not be lazy.
+		priority = 1000,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			sections = {
+				lualine_a = {
+					"mode",
+				},
+				lualine_b = {
+					{
+						"filetype",
+						icon_only = true,
+					},
+					"diagnostics",
+				},
+				lualine_c = {
+					"filename",
+				},
+				lualine_x = {
+					function()
+						local bufnr = vim.api.nvim_get_current_buf()
+
+						local clients = vim.lsp.buf_get_clients(bufnr)
+						if next(clients) == nil then
+							return ""
+						end
+
+						local c = {}
+						for _, client in pairs(clients) do
+							table.insert(c, client.name)
+						end
+						return table.concat(c, "|")
+					end,
+				},
+				lualine_y = {
+					"progress",
+				},
+				lualine_z = {
+					"location",
+				},
+			},
+		},
+		config = true,
+	},
 	{
 		-- Telescope is a fuzzy file finder, and also provides some helpful tools, like live_grep.
 		-- It's seriously amazing.

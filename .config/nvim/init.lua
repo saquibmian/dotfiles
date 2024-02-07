@@ -125,6 +125,9 @@ require("lazy").setup({
 					"location",
 				},
 			},
+			extensions = {
+				"nvim-dap-ui",
+			},
 		},
 		config = true,
 	},
@@ -369,9 +372,6 @@ require("lazy").setup({
 		keys = {
 			{ "<leader>o", "<cmd>Outline<cr>", desc = "Toggle Outline" },
 		},
-		opts = {
-			-- filter.default = { "Package", "Module", "Function", "Constant" },
-		},
 		config = true,
 	},
 	{
@@ -382,32 +382,42 @@ require("lazy").setup({
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
-			{
-				"<F9>",
-				function()
-					require("dap").toggle_breakpoint()
-				end,
-				desc = "Toggle breakpoint",
-			},
+			{ "<F9>", ":DapToggleBreakpoint<CR>", desc = "Toggle breakpoint" },
 		},
 		config = function()
+			local dap = require("dap")
+			-- adapters
+			local install_dir = vim.fn.stdpath("data") .. "/mason"
+			dap.adapters.netcoredbg = {
+				type = "executable",
+				command = install_dir .. "/packages/netcoredbg/netcoredbg",
+				args = { "--interpreter=vscode" },
+			}
+			-- configurations
+			dap.configurations.cs = {
+				{
+					type = "netcoredbg",
+					name = "launch - netcoredbg",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+					end,
+				},
+			}
+			-- keymaps
+			-- TODO: move these out to actual keymaps
 			vim.keymap.set("n", "<F5>", function()
-				local dap = require("dap")
 				local session = dap.session()
 				if session == nil then
-					require("dapui").open()
 					dap.continue()
 				else
 					dap.restart()
 				end
 			end)
-			vim.keymap.set("n", "<S-F11>", ":DapStepOut<CR>")
 			vim.keymap.set("n", "<F10>", ":DapStepOver<CR>")
 			vim.keymap.set("n", "<F11>", ":DapStepInto<CR>")
-			vim.keymap.set("n", "<S-F5>", function()
-				require("dap").terminate()
-				require("dapui").close()
-			end)
+			vim.keymap.set("n", "<F12>", ":DapStepOut<CR>")
+			vim.keymap.set("n", "<S-F5>", ":DapTerminate<CR>")
 		end,
 		lazy = true,
 	},
@@ -417,7 +427,20 @@ require("lazy").setup({
 			"mfussenegger/nvim-dap",
 			"leoluz/nvim-dap-go",
 		},
-		config = true,
+		config = function()
+			local dapui = require("dapui")
+			dapui.setup()
+			local dap = require("dap")
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close()
+			end
+		end,
 	},
 	{
 		"leoluz/nvim-dap-go",

@@ -378,6 +378,55 @@ require("lazy").setup({
 		"dnlhc/glance.nvim",
 		config = true,
 	},
+	-- DAP (Debug Adapter Protocol) support
+	{
+		"mfussenegger/nvim-dap",
+		keys = {
+			{
+				"<F9>",
+				function()
+					require("dap").toggle_breakpoint()
+				end,
+				desc = "Toggle breakpoint",
+			},
+		},
+		config = function()
+			vim.keymap.set("n", "<F5>", function()
+				local dap = require("dap")
+				local session = dap.session()
+				if session == nil then
+					require("dapui").open()
+					dap.continue()
+				else
+					dap.restart()
+				end
+			end)
+			vim.keymap.set("n", "<S-F11>", ":DapStepOut<CR>")
+			vim.keymap.set("n", "<F10>", ":DapStepOver<CR>")
+			vim.keymap.set("n", "<F11>", ":DapStepInto<CR>")
+			vim.keymap.set("n", "<S-F5>", function()
+				require("dap").terminate()
+				require("dapui").close()
+			end)
+		end,
+		lazy = true,
+	},
+	{
+		"rcarriga/nvim-dap-ui",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"leoluz/nvim-dap-go",
+		},
+		config = true,
+	},
+	{
+		"leoluz/nvim-dap-go",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = true,
+	},
 })
 
 -- The configuration for lsp-zero, LSP servers, and autocomplete mappings. See the docs for lsp-zero for more

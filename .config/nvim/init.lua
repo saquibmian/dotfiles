@@ -81,6 +81,10 @@ require("lazy").setup({
 		priority = 1000,
 	},
 	{
+		"folke/neodev.nvim",
+		config = true,
+	},
+	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
@@ -89,20 +93,20 @@ require("lazy").setup({
 					"mode",
 				},
 				lualine_b = {
-					{
-						"filetype",
-						icon_only = true,
-					},
 					"diagnostics",
 				},
 				lualine_c = {
-					"filename",
+					{
+						"filename",
+						color = { fg = "#ffffff" },
+						path = 1,
+					},
 				},
 				lualine_x = {
 					function()
 						local bufnr = vim.api.nvim_get_current_buf()
 
-						local clients = vim.lsp.buf_get_clients(bufnr)
+						local clients = vim.lsp.get_active_clients({ bufnr })
 						if next(clients) == nil then
 							return ""
 						end
@@ -325,7 +329,7 @@ require("lazy").setup({
 		-- It also integrates with Trouble to browse these comments workspace-wide.
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = {
+		opts = {
 			highlight = {
 				-- Override the pattern to allow highlighting TODOs in the style below:
 				-- TODO(foo): hello
@@ -432,6 +436,7 @@ require("mason-lspconfig").setup({
 		"rust_analyzer",
 		"omnisharp",
 		"svelte",
+		"lua_ls",
 	},
 	handlers = {
 		lsp_zero.default_setup,

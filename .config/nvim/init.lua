@@ -33,16 +33,6 @@ vim.opt.updatetime = 50 -- I want fast updates.
 vim.opt.colorcolumn = "120"
 -- NOTE: Check `after/ftplugin` for options specific to filetypes.
 
--- These keymaps make working with split windows easier.
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>")
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>")
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
-vim.keymap.set("n", "<A-h>", "<cmd>vertical resize +1<CR>")
-vim.keymap.set("n", "<A-l>", "<cmd>vertical resize -1<CR>")
-vim.keymap.set("n", "<A-j>", "<cmd>resize +1<CR>")
-vim.keymap.set("n", "<A-k>", "<cmd>resize -1<CR>")
-
 -- DarkMode switches my theme to darkmode.
 function DarkMode()
 	vim.api.nvim_set_option("background", "dark")
@@ -132,6 +122,22 @@ require("lazy").setup({
 		config = true,
 	},
 	{
+		-- SmartSplits makes working with splits much nicer
+		"mrjones2014/smart-splits.nvim",
+		build = "./kitty/install-kittens.bash",
+		init = function()
+			vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
+			vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
+			vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)
+			vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
+			-- moving between splits
+			vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
+			vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
+			vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
+			vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
+		end,
+	},
+	{
 		-- Telescope is a fuzzy file finder, and also provides some helpful tools, like live_grep.
 		-- It's seriously amazing.
 		"nvim-telescope/telescope.nvim",
@@ -165,6 +171,14 @@ require("lazy").setup({
 			},
 			{
 				"<S-D-f>",
+				function()
+					require("telescope.builtin").live_grep()
+				end,
+				mode = "n",
+				desc = "Search across the workspace in Telescope",
+			},
+			{
+				"<leader>F",
 				function()
 					require("telescope.builtin").live_grep()
 				end,

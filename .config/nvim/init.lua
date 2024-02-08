@@ -499,7 +499,7 @@ lsp_zero.on_attach(function(client, bufnr)
 		-- Go to next error
 		vim.diagnostic.goto_next()
 	end, opts)
-	vim.keymap.set("n", "<C-.>", function()
+	vim.keymap.set("n", "<leader><leader>", function()
 		-- Trigger code actions
 		vim.lsp.buf.code_action()
 	end, opts)

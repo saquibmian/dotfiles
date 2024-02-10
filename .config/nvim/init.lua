@@ -464,6 +464,10 @@ require("lazy").setup({
 		},
 		config = true,
 	},
+	{
+		"lewis6991/gitsigns.nvim",
+		config = true,
+	},
 })
 
 -- The configuration for lsp-zero, LSP servers, and autocomplete mappings. See the docs for lsp-zero for more

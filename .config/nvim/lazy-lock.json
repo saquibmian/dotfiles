@@ -9,6 +9,7 @@
   "lazy.nvim": { "branch": "main", "commit": "aedcd79811d491b60d0a6577a9c1701063c2a609" },
   "lsp-zero.nvim": { "branch": "v3.x", "commit": "abac76482ec3012a2b359ba956a74e2ffd33d46f" },
   "lualine.nvim": { "branch": "master", "commit": "7d131a8d3ba5016229e8a1d08bf8782acea98852" },
+  "lush.nvim": { "branch": "main", "commit": "2e8d34e748642621d761a65e3c2a198154b914e8" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "0954d7730e749d606ddf8d7ae8846848be435d53" },
   "mason.nvim": { "branch": "main", "commit": "c43eeb5614a09dc17c03a7fb49de2e05de203924" },
   "neodev.nvim": { "branch": "main", "commit": "0ee95ecefc8ea45898a0383364f736e098c8703f" },
@@ -30,5 +31,6 @@
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "vim-fugitive": { "branch": "master", "commit": "e7bf502a6ae492f42a91d231864e25630286319b" },
   "vim-illuminate": { "branch": "master", "commit": "305bf07b919ac526deb5193280379e2f8b599926" },
-  "vscode.nvim": { "branch": "main", "commit": "380c1068612b1bfbe35d70a4f2e58be5030a0707" }
+  "vscode.nvim": { "branch": "main", "commit": "380c1068612b1bfbe35d70a4f2e58be5030a0707" },
+  "zenbones.nvim": { "branch": "main", "commit": "33672310aac6b823c88cf16d5d99472439111f9c" }
 }

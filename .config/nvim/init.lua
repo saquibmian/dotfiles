@@ -71,6 +71,15 @@ require("lazy").setup({
 		priority = 1000,
 	},
 	{
+		"mcchrish/zenbones.nvim",
+		requires = "rktjmp/lush.nvim",
+		lazy = false,
+		priority = 1000,
+	},
+	{
+		"rktjmp/lush.nvim",
+	},
+	{
 		"folke/neodev.nvim",
 		config = true,
 	},
@@ -116,6 +125,7 @@ require("lazy").setup({
 				},
 			},
 			extensions = {
+				"nvim-tree",
 				"nvim-dap-ui",
 			},
 		},
@@ -149,6 +159,11 @@ require("lazy").setup({
 				layout_strategy = "vertical",
 				layout_config = {
 					preview_height = 0.70,
+				},
+			},
+			pickers = {
+				colorscheme = {
+					enable_preview = true,
 				},
 			},
 		},

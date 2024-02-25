@@ -54,7 +54,7 @@ return {
 				lualine_c = {
 					{
 						"filename",
-						color = { fg = "#ffffff" },
+						-- color = { fg = "#ffffff" },
 						path = 1,
 					},
 				},

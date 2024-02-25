@@ -2,6 +2,13 @@
 /.config/git/local_config
 # written to by fish's set_kitty_theme function's invocation of `kitty +kitten themes`
 /.config/kitty/themes.conf.bak
+/.config/gpt4all.io
+/.config/htop
+/.config/iterm2
+/.config/zed
+/.vim
+/.z*
+/.gitconfig
 
 # contains sensitive information
 /.netrc

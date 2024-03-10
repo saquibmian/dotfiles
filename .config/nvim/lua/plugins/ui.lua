@@ -183,7 +183,12 @@ return {
 			{
 				"<leader>ff",
 				function()
-					require("telescope.builtin").find_files()
+					require("telescope.builtin").find_files({
+						layout_config = {
+							preview_cutoff = 100000,
+							height = 20,
+						},
+					})
 				end,
 				mode = "n",
 				desc = "Open fuzzy file finder in Telescope",
@@ -191,7 +196,12 @@ return {
 			{
 				"<leader>fb",
 				function()
-					require("telescope.builtin").buffers()
+					require("telescope.builtin").buffers({
+						layout_config = {
+							preview_cutoff = 100000,
+							height = 20,
+						},
+					})
 				end,
 				mode = "n",
 				desc = "Open buffers list in Telescope",

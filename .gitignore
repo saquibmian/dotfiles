@@ -2,10 +2,16 @@
 /.config/git/local_config
 # written to by fish's set_kitty_theme function's invocation of `kitty +kitten themes`
 /.config/kitty/themes.conf.bak
+/.config/gcloud
 /.config/gpt4all.io
 /.config/htop
 /.config/iterm2
 /.config/zed
+/.dbclient
+/.gradle
+/.kube/cache
+/.kube/http-cache
+/.yarn/*/cache
 /.vim
 /.z*
 /.gitconfig

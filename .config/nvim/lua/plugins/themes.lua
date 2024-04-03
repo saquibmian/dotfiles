@@ -17,12 +17,8 @@ return {
 		lazy = false,
 		priority = 1000, -- Themes should not be lazy.
 	},
-	{
-		-- My main dark theme. I don't particularly like it, I want to place with rosepine.
-		"martinsione/darkplus.nvim",
-		priority = 1000,
-		lazy = false, -- Themes should not be lazy.
-	},
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{ "savq/melange-nvim", priority = 1000, lazy = false },
 	{
 		"Mofiqul/vscode.nvim",
 		priority = 1000,

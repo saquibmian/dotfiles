@@ -65,4 +65,9 @@ return {
 		"dnlhc/glance.nvim",
 		config = true,
 	},
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^4",
+		ft = { "rust" },
+	},
 }

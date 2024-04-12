@@ -61,6 +61,7 @@ return {
 						-- color = { fg = "#ffffff" },
 						path = 1,
 					},
+					"lsp_progress",
 				},
 				lualine_x = {
 					function()
@@ -91,6 +92,9 @@ return {
 			},
 		},
 		config = true,
+	},
+	{
+		"arkav/lualine-lsp-progress",
 	},
 	{
 		-- SmartSplits makes working with splits much nicer

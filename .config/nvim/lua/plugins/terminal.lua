@@ -8,14 +8,15 @@ return {
 				open_mapping = "\\t",
 				direction = "float",
 			})
-			-- lazygit terminal bound to \-g
 			local Terminal = require("toggleterm.terminal").Terminal
-			local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-			local function _lazygit_toggle()
-				lazygit:toggle()
-			end
+
+			-- lazygit terminal bound to \-g
+			local lazygit = Terminal:new({
+				cmd = "lazygit",
+				hidden = true,
+			})
 			vim.keymap.set("n", "\\g", function()
-				_lazygit_toggle()
+				lazygit:toggle()
 			end, { noremap = true, silent = true })
 		end,
 	},

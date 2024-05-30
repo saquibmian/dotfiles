@@ -1,0 +1,8 @@
+[user]
+  name = Saquib Mian
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+[alias]
+  co = checkout
+  stashm = stash
+

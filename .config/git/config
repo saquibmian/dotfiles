@@ -4,5 +4,5 @@
   insteadOf = https://github.com/
 [alias]
   co = checkout
-  stashm = stash
+  stashm = stash --include-untracked -m
 

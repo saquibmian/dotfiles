@@ -35,6 +35,11 @@ return {
 		end,
 	},
 	{
+		"arzg/vim-colors-xcode",
+		priority = 1000,
+		lazy = false, -- Themes should not be lazy.
+	},
+	{
 		"rktjmp/lush.nvim",
 	},
 }

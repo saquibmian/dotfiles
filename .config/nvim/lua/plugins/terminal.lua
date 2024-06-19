@@ -18,6 +18,15 @@ return {
 			vim.keymap.set("n", "\\g", function()
 				lazygit:toggle()
 			end, { noremap = true, silent = true })
+
+			-- sql terminal bound to \-s
+			local sql = Terminal:new({
+				cmd = "pgcli",
+				hidden = true,
+			})
+			vim.keymap.set("n", "\\s", function()
+				sql:toggle()
+			end, { noremap = true, silent = true })
 		end,
 	},
 }

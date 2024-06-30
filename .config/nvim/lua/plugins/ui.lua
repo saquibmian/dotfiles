@@ -180,6 +180,13 @@ return {
 				layout_config = {
 					preview_height = 0.70,
 				},
+				mappings = {
+					n = {
+						["<c-d>"] = function(bufnr)
+							require("telescope.actions").delete_buffer(bufnr)
+						end,
+					},
+				},
 			},
 			pickers = {
 				colorscheme = {

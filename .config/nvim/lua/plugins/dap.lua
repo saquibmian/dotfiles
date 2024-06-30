@@ -71,11 +71,13 @@ return {
 			-- keymaps
 		end,
 	},
+	{ "nvim-neotest/nvim-nio" },
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = {
 			"mfussenegger/nvim-dap",
 			"leoluz/nvim-dap-go",
+			"nvim-neotest/nvim-nio",
 		},
 		config = function()
 			local dapui = require("dapui")

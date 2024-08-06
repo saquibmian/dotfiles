@@ -2,6 +2,11 @@
 -- information about what's going on here.
 local lsp_zero = require("lsp-zero")
 lsp_zero.on_attach(function(client, bufnr)
+	-- enable inlay hints if they're supported by the client
+	if client.supports_method("textDocument/inlayHint") or client.server_capabilities.inlayHintProvider then
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	end
+
 	local opts = { buffer = bufnr, remap = false }
 
 	vim.keymap.set("n", "gd", function()

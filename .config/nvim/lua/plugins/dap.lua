@@ -85,6 +85,20 @@ return {
 			dap.listeners.before.event_terminated["dapui_config"] = dapui.close
 			dap.listeners.before.event_exited["dapui_config"] = dapui.close
 		end,
+		keys = {
+			{
+				"<M-k>",
+				function()
+					local dap = require("dap")
+					if dap.session() ~= nil then
+						local dapui = require("dapui")
+						dapui.eval() -- evaluate the expression under the cursor, or within the visual selection.
+					end
+				end,
+				mode = "n",
+				desc = "Hover expression under cursor in dapui",
+			},
+		},
 	},
 	{
 		"leoluz/nvim-dap-go",

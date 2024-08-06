@@ -25,6 +25,10 @@ vim.opt.updatetime = 50 -- I want fast updates.
 vim.opt.colorcolumn = "120"
 -- NOTE: Check `after/ftplugin` for options specific to filetypes.
 
+-- Use ripgrep instead of grep
+vim.opt.grepprg = "rg --vimgrep"
+vim.opt.grepformat = "%f:%l:%c:%m"
+
 -- I use the Lazy.nvim package manager. It provides the most flexibile and sane default behaviour.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

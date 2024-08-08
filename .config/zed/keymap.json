@@ -1,0 +1,18 @@
+[
+  // Navigate UI panes using CTRL + hjkl
+  {
+    "context": "Dock || Editor",
+    "bindings": {
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
+    }
+  },
+  {
+    "context": "Editor || Terminal",
+    "bindings": {
+      "\\ t": "workspace::ToggleBottomDock"
+    }
+  }
+]

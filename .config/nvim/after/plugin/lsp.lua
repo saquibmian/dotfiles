@@ -73,21 +73,10 @@ require("mason-lspconfig").setup({
 			return true
 		end,
 		gopls = function()
+			local settings = require("plugins.lsp.settings")
 			require("lspconfig").gopls.setup({
 				settings = {
-					gopls = {
-						semanticTokens = true,
-						linksInHover = false,
-						hints = {
-							assignVariableTypes = true,
-							compositeLiteralFields = true,
-							compositeLiteralTypes = true,
-							constantValues = true,
-							functionTypeParameters = true,
-							parameterNames = true,
-							rangeVariableTypes = true,
-						},
-					},
+					gopls = settings.gopls,
 				},
 			})
 		end,

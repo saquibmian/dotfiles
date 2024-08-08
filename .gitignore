@@ -2,19 +2,34 @@
 /.config/git/local_config
 # written to by fish's set_kitty_theme function's invocation of `kitty +kitten themes`
 /.config/kitty/themes.conf.bak
+/.config/kitty/kitty.conf.bak
 /.config/gcloud
 /.config/gpt4all.io
 /.config/htop
 /.config/iterm2
-/.config/zed
+/.config/op
+/.config/raycast/extensions
+/.config/pgcli/history
+/.config/pgcli/log
+/.config/ILSpy.xml
+/.config/configstore
+/.config/core
 /.dbclient
 /.gradle
-/.kube/cache
-/.kube/http-cache
+/.kube
 /.yarn/*/cache
+/.pnpm-state
 /.vim
 /.z*
 /.gitconfig
+
+# zed config
+!/.config/zed/keymap.json
+!/.config/zed/settings.json
+/.config/zed/embeddings
+/.config/zed/conversations
+/.config/zed/prompts
+/.config/zed/.tmp*
 
 # contains sensitive information
 /.netrc
@@ -50,10 +65,15 @@
 /.sqlite_history
 /.lesshst
 /.node_repl_history
+/.psql_history
 
 /.rest-client
 /.templateengine
 /.zsh_sessions
+/.wget-hsts
+
+/.swo
+/.swp
 
 # Oh My ZSH install
 /.oh-my-zsh

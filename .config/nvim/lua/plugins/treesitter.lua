@@ -47,8 +47,8 @@ return {
 						keymaps = {
 							["af"] = { query = "@function.outer", desc = "Select outer part of function region" },
 							["if"] = "@function.inner",
-							["ap"] = "@parameter.outer",
-							["ip"] = "@parameter.inner",
+							["aa"] = "@parameter.outer",
+							["ia"] = "@parameter.inner",
 							["ac"] = "@class.outer",
 							["ic"] = "@class.inner",
 						},
@@ -72,19 +72,19 @@ return {
 						set_jumps = true,
 						goto_next_start = {
 							["]m"] = "@function.outer",
-							["]p"] = { query = "@parameter.inner", desc = "Next parameter start" },
+							["]a"] = { query = "@parameter.inner", desc = "Next parameter start" },
 						},
 						goto_next_end = {
 							["]M"] = "@function.outer",
-							["]P"] = "@parameter.inner",
+							["]A"] = "@parameter.inner",
 						},
 						goto_previous_start = {
 							["[m"] = "@function.outer",
-							["[p"] = "@parameter.inner",
+							["[a"] = "@parameter.inner",
 						},
 						goto_previous_end = {
 							["[M"] = "@function.outer",
-							["[P"] = "@parameter.inner",
+							["[A"] = "@parameter.inner",
 						},
 					},
 				},

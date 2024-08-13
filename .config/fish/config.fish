@@ -12,3 +12,4 @@ if status is-interactive
 end
 
 bind \cf project
+bind \co project_vim

@@ -12,7 +12,7 @@ return {
 			{
 				"<leader>pv",
 				function()
-					vim.cmd.NvimTreeToggle()
+					vim.cmd.NvimTreeFindFileToggle()
 				end,
 				mode = "n",
 				desc = "Toggle NvimTree",

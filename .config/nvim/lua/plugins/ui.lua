@@ -176,10 +176,6 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
 			defaults = {
-				layout_strategy = "vertical",
-				layout_config = {
-					preview_height = 0.70,
-				},
 				mappings = {
 					n = {
 						["<c-d>"] = function(bufnr)
@@ -192,18 +188,46 @@ return {
 				colorscheme = {
 					enable_preview = true,
 				},
+				find_files = {
+					theme = "dropdown",
+					layout_config = {
+						preview_cutoff = 100000,
+						width = 120,
+						height = 20,
+					},
+					-- Format path as "file.txt (path\to\file\)"
+					path_display = function(_, path)
+						local tail = require("telescope.utils").path_tail(path)
+						return string.format("%s %s", tail, path),
+							{ { { 1, #tail }, "Constant" }, { { 2, #path }, "TelescopeResultsComment" } }
+					end,
+				},
+				buffers = {
+					theme = "dropdown",
+					layout_config = {
+						preview_cutoff = 100000,
+						width = 120,
+						height = 20,
+					},
+				},
+				lsp_dynamic_workspace_symbols = {
+					previewer = false,
+					theme = "dropdown",
+					entry_maker = require("plugins.custom.telescope-symbol-entry-maker").maker(),
+				},
+				live_grep = {
+					layout_strategy = "vertical",
+					layout_config = {
+						preview_height = 0.70,
+					},
+				},
 			},
 		},
 		keys = {
 			{
 				"<leader>ff",
 				function()
-					require("telescope.builtin").find_files({
-						layout_config = {
-							preview_cutoff = 100000,
-							height = 20,
-						},
-					})
+					require("telescope.builtin").find_files()
 				end,
 				mode = "n",
 				desc = "Open fuzzy file finder in Telescope",
@@ -211,12 +235,7 @@ return {
 			{
 				"<leader>fb",
 				function()
-					require("telescope.builtin").buffers({
-						layout_config = {
-							preview_cutoff = 100000,
-							height = 20,
-						},
-					})
+					require("telescope.builtin").buffers()
 				end,
 				mode = "n",
 				desc = "Open buffers list in Telescope",
@@ -236,6 +255,14 @@ return {
 				end,
 				mode = "n",
 				desc = "Search across the workspace in Telescope",
+			},
+			{
+				"<leader>T",
+				function()
+					require("telescope.builtin").lsp_dynamic_workspace_symbols()
+				end,
+				mode = "n",
+				desc = "Find an LSP symbol across the workspace in Telescope",
 			},
 		},
 	},

@@ -196,18 +196,7 @@ return {
 							width = 120,
 							height = 20,
 						},
-						-- Format path as "file.txt (path\to\file\)"
-						path_display = function(_, path)
-							local tail = require("telescope.utils").path_tail(path)
-							if tail == path then
-								path = ""
-							end
-							return string.format("%s %s", tail, path),
-								{
-									{ { 0, #tail }, "Constant" },
-									{ { string.len(tail), #path }, "TelescopeResultsComment" },
-								}
-						end,
+						path_display = { "filename_first" },
 					},
 					buffers = {
 						theme = "dropdown",
@@ -298,7 +287,7 @@ return {
 				function()
 					require("trouble").open({
 						mode = "diagnostics",
-						-- TODO: document filter
+						filter = { buf = 0 },
 					})
 				end,
 				mode = "n",

@@ -254,7 +254,7 @@ return {
 				desc = "Search across the workspace in Telescope",
 			},
 			{
-				"<leader>T",
+				"<D-p>",
 				function()
 					require("telescope.builtin").lsp_dynamic_workspace_symbols()
 				end,

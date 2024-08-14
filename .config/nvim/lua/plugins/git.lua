@@ -14,7 +14,7 @@ return {
 	{
 		-- Gitsigns shows Git change markers in statusline.
 		"lewis6991/gitsigns.nvim",
-		config = {
+		opts = {
 			on_attach = function(bufnr)
 				local gitsigns = require("gitsigns")
 

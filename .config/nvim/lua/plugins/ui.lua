@@ -174,60 +174,63 @@ return {
 		cmd = "Telescope",
 		version = false, -- The latest released version is no good, it's very old. Choose latest main.
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {
-			defaults = {
-				mappings = {
-					n = {
-						["<c-d>"] = function(bufnr)
-							require("telescope.actions").delete_buffer(bufnr)
+		config = function()
+			require("telescope").setup({
+				defaults = {
+					mappings = {
+						n = {
+							["<c-d>"] = function(bufnr)
+								require("telescope.actions").delete_buffer(bufnr)
+							end,
+						},
+					},
+				},
+				pickers = {
+					colorscheme = {
+						enable_preview = true,
+					},
+					find_files = {
+						theme = "dropdown",
+						layout_config = {
+							preview_cutoff = 100000,
+							width = 120,
+							height = 20,
+						},
+						-- Format path as "file.txt (path\to\file\)"
+						path_display = function(_, path)
+							local tail = require("telescope.utils").path_tail(path)
+							if tail == path then
+								path = ""
+							end
+							return string.format("%s %s", tail, path),
+								{
+									{ { 0, #tail }, "Constant" },
+									{ { string.len(tail), #path }, "TelescopeResultsComment" },
+								}
 						end,
 					},
-				},
-			},
-			pickers = {
-				colorscheme = {
-					enable_preview = true,
-				},
-				find_files = {
-					theme = "dropdown",
-					layout_config = {
-						preview_cutoff = 100000,
-						width = 120,
-						height = 20,
+					buffers = {
+						theme = "dropdown",
+						layout_config = {
+							preview_cutoff = 100000,
+							width = 120,
+							height = 20,
+						},
 					},
-					-- Format path as "file.txt (path\to\file\)"
-					path_display = function(_, path)
-						local tail = require("telescope.utils").path_tail(path)
-						if tail == path then
-							path = ""
-						end
-						return string.format("%s %s", tail, path),
-							{ { { 0, #tail }, "Constant" }, { { string.len(tail), #path }, "TelescopeResultsComment" } }
-					end,
-				},
-				buffers = {
-					theme = "dropdown",
-					layout_config = {
-						preview_cutoff = 100000,
-						width = 120,
-						height = 20,
+					lsp_dynamic_workspace_symbols = {
+						previewer = false,
+						theme = "dropdown",
+						entry_maker = require("plugins.custom.telescope-symbol-entry-maker").maker(),
+					},
+					live_grep = {
+						layout_strategy = "vertical",
+						layout_config = {
+							preview_height = 0.70,
+						},
 					},
 				},
-				lsp_dynamic_workspace_symbols = {
-					previewer = false,
-					theme = "dropdown",
-					entry_maker = function()
-						return require("plugins.custom.telescope-symbol-entry-maker").maker()
-					end,
-				},
-				live_grep = {
-					layout_strategy = "vertical",
-					layout_config = {
-						preview_height = 0.70,
-					},
-				},
-			},
-		},
+			})
+		end,
 		keys = {
 			{
 				"<leader>ff",

@@ -296,7 +296,10 @@ return {
 			{
 				"<leader>dd",
 				function()
-					require("trouble").open("document_diagnostics")
+					require("trouble").open({
+						mode = "diagnostics",
+						-- TODO: document filter
+					})
 				end,
 				mode = "n",
 				desc = "Show document diagnostics in Trouble",
@@ -304,7 +307,7 @@ return {
 			{
 				"<leader>wd",
 				function()
-					require("trouble").open("workspace_diagnostics")
+					require("trouble").open({ mode = "diagnostics" })
 				end,
 				mode = "n",
 				desc = "Show workspace diagnostics in Trouble",

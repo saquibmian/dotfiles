@@ -198,8 +198,11 @@ return {
 					-- Format path as "file.txt (path\to\file\)"
 					path_display = function(_, path)
 						local tail = require("telescope.utils").path_tail(path)
+						if tail == path then
+							path = ""
+						end
 						return string.format("%s %s", tail, path),
-							{ { { 1, #tail }, "Constant" }, { { 2, #path }, "TelescopeResultsComment" } }
+							{ { { 0, #tail }, "Constant" }, { { string.len(tail), #path }, "TelescopeResultsComment" } }
 					end,
 				},
 				buffers = {

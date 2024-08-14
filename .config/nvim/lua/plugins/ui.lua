@@ -213,7 +213,9 @@ return {
 				lsp_dynamic_workspace_symbols = {
 					previewer = false,
 					theme = "dropdown",
-					entry_maker = require("plugins.custom.telescope-symbol-entry-maker").maker(),
+					entry_maker = function()
+						return require("plugins.custom.telescope-symbol-entry-maker").maker()
+					end,
 				},
 				live_grep = {
 					layout_strategy = "vertical",

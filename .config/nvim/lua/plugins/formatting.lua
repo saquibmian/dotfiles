@@ -14,6 +14,7 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				javascript = { { "prettierd", "prettier" } },
+				json = { { "jq" } },
 				sql = { "pg_format" },
 			},
 			format_on_save = function(bufnr)

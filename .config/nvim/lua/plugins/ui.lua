@@ -4,6 +4,14 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	{
+		"folke/zen-mode.nvim",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+	},
+	{
 		-- My main file tree. Shows the file tree, but can also toggle showing open buffers by <S-b>.
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,

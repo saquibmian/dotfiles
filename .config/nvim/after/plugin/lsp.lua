@@ -67,6 +67,11 @@ require("mason-lspconfig").setup({
 			local lua_opts = lsp_zero.nvim_lua_ls()
 			require("lspconfig").lua_ls.setup(lua_opts)
 		end,
+		bufls = function()
+			require("lspconfig").bufls.setup({
+				cmd = { "buf", "beta", "lsp" },
+			})
+		end,
 		rust_analyzer = function()
 			-- We disable the `neovim/lspconfig`'s rust_analyzer config because we have rustaceanim installed,
 			-- and it sets up its own LSP config.

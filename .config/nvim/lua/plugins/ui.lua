@@ -230,7 +230,7 @@ return {
 		end,
 		keys = {
 			{
-				"<leader>ff",
+				"<D-o>",
 				function()
 					require("telescope.builtin").find_files()
 				end,
@@ -238,7 +238,7 @@ return {
 				desc = "Open fuzzy file finder in Telescope",
 			},
 			{
-				"<leader>fb",
+				"<S-D-o>",
 				function()
 					require("telescope.builtin").buffers()
 				end,
@@ -247,14 +247,6 @@ return {
 			},
 			{
 				"<S-D-f>",
-				function()
-					require("telescope.builtin").live_grep()
-				end,
-				mode = "n",
-				desc = "Search across the workspace in Telescope",
-			},
-			{
-				"<leader>F",
 				function()
 					require("telescope.builtin").live_grep()
 				end,

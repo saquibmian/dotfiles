@@ -1,0 +1,9 @@
+gui:
+  expandFocusedSidePanel: true
+  expandedSidePanelWeight: 3
+  nerdFontsVersion: "3"
+  showListFooter: false # don't show `x of y` in list footers
+git:
+  branchPrefix: "smian/"
+os:
+  editPreset: nvim

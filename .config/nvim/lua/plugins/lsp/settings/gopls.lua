@@ -10,4 +10,7 @@ return {
 		parameterNames = true,
 		rangeVariableTypes = true,
 	},
+	codelenses = {
+		test = true,
+	},
 }

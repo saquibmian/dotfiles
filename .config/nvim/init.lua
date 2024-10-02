@@ -22,7 +22,8 @@ vim.opt.scrolloff = 8 -- Ensure there are always 8 free lines at the bottom of t
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50 -- I want fast updates.
 -- Show a vertical line at the 120 character mark, to help align text.
-vim.opt.colorcolumn = "120"
+vim.opt.textwidth = 100
+vim.opt.colorcolumn = "100"
 -- NOTE: Check `after/ftplugin` for options specific to filetypes.
 
 -- Use ripgrep instead of grep

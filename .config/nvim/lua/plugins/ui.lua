@@ -312,9 +312,14 @@ return {
 			highlight = {
 				-- Override the pattern to allow highlighting TODOs in the style below:
 				-- TODO(foo): hello
-				-- ^^^^ is highlighted
+				-- ^^^^^^^^^ is highlighted
+				-- NOTE: This is a vimgrep regex.
+				pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]],
 				keyword = "bg",
-				pattern = [[.*<(KEYWORDS)\s*(\(.*\))?:]],
+			},
+			search = {
+				-- NOTE: This is a ripgrep regex.
+				pattern = [[\b(KEYWORDS)(\(.*\))*:]],
 			},
 		},
 	},

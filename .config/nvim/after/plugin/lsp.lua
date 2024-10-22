@@ -40,6 +40,10 @@ lsp_zero.on_attach(function(client, bufnr)
 		-- Trigger code actions
 		vim.lsp.buf.code_action()
 	end, opts)
+	vim.keymap.set("v", "<leader><leader>", function()
+		-- Trigger code actions
+		vim.lsp.buf.code_action()
+	end, opts)
 	vim.keymap.set("n", "<F2>", function()
 		-- Rename symbol
 		vim.lsp.buf.rename()

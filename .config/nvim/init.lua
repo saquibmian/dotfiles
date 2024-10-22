@@ -30,6 +30,15 @@ vim.opt.colorcolumn = "100"
 vim.opt.grepprg = "rg --vimgrep"
 vim.opt.grepformat = "%f:%l:%c:%m"
 
+-- Folding based on Treesitter
+-- Use `za` to toggle, `zc` to close, and `zo` to open folds.
+-- Use `zR` to open all folds, `zM` to close all folds.
+-- Use `zA` to toggle all subfolds.
+vim.opt.foldmethod = "expr" -- Use expr for folding. See next line for the expression.
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use LSP for folding.
+vim.opt.foldtext = "" -- Enable syntax highlighting on the fold itself.
+vim.opt.foldlevel = 99 -- Don't close any folds by default.
+
 -- I use the Lazy.nvim package manager. It provides the most flexibile and sane default behaviour.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

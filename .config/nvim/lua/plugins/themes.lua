@@ -40,6 +40,11 @@ return {
 		lazy = false, -- Themes should not be lazy.
 	},
 	{
+		"maxmx03/solarized.nvim",
+		priority = 1000,
+		lazy = false, -- Themes should not be lazy.
+	},
+	{
 		"rktjmp/lush.nvim",
 	},
 }

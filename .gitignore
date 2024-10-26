@@ -66,6 +66,17 @@
 /.lesshst
 /.node_repl_history
 /.psql_history
+/OrbStack
+/.orbstack/bin
+/.orbstack/data
+/.orbstack/k8s
+/.orbstack/log
+/.orbstack/run
+/.orbstack/shell
+/.orbstack/ssh
+/.orbstack/.installid
+/.orbstack/vmconfig.json
+/.orbstack/vmstate.json
 
 /.rest-client
 /.templateengine

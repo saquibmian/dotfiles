@@ -127,3 +127,6 @@
 /go/
 # Directory for code
 /dev/
+
+# OrbStack network mount
+OrbStack

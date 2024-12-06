@@ -5,6 +5,7 @@
 [alias]
   co = checkout
   stashm = stash --include-untracked -m
+  stashu = stash --keep-index -u
 [push]
 	autoSetupRemote = true
 

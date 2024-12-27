@@ -55,7 +55,7 @@ return {
 						selection_modes = {
 							["@parameter.outer"] = "v", -- charwise
 							["@function.outer"] = "V", -- linewise
-							["@class.outer"] = "<c-v>", -- blockwise
+							["@class.outer"] = "V", -- linewise
 						},
 					},
 					swap = {
@@ -74,17 +74,9 @@ return {
 							["]m"] = "@function.outer",
 							["]a"] = { query = "@parameter.inner", desc = "Next parameter start" },
 						},
-						goto_next_end = {
-							["]M"] = "@function.outer",
-							["]A"] = "@parameter.inner",
-						},
 						goto_previous_start = {
 							["[m"] = "@function.outer",
 							["[a"] = "@parameter.inner",
-						},
-						goto_previous_end = {
-							["[M"] = "@function.outer",
-							["[A"] = "@parameter.inner",
 						},
 					},
 				},

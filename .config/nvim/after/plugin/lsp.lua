@@ -56,10 +56,10 @@ end)
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = {
-		"bufls",
+		"buf_ls",
 		"html",
 		"gopls",
-		"tsserver",
+		"ts_ls",
 		"rust_analyzer",
 		"omnisharp",
 		"svelte",
@@ -71,8 +71,8 @@ require("mason-lspconfig").setup({
 			local lua_opts = lsp_zero.nvim_lua_ls()
 			require("lspconfig").lua_ls.setup(lua_opts)
 		end,
-		bufls = function()
-			require("lspconfig").bufls.setup({
+		buf_ls = function()
+			require("lspconfig").buf_ls.setup({
 				cmd = { "buf", "beta", "lsp" },
 			})
 		end,

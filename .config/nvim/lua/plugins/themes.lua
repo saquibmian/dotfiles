@@ -45,6 +45,11 @@ return {
 		lazy = false, -- Themes should not be lazy.
 	},
 	{
+		"AlexvZyl/nordic.nvim",
+		lazy = false,
+		priority = 1000,
+	},
+	{
 		"rktjmp/lush.nvim",
 	},
 }

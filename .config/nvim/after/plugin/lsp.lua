@@ -72,9 +72,7 @@ require("mason-lspconfig").setup({
 			require("lspconfig").lua_ls.setup(lua_opts)
 		end,
 		buf_ls = function()
-			require("lspconfig").buf_ls.setup({
-				cmd = { "buf", "beta", "lsp" },
-			})
+			require("lspconfig").buf_ls.setup({})
 		end,
 		rust_analyzer = function()
 			-- We disable the `neovim/lspconfig`'s rust_analyzer config because we have rustaceanim installed,
@@ -101,7 +99,7 @@ cmp.setup({
 		{ name = "luasnip", keyword_length = 2 },
 		{ name = "buffer", keyword_length = 3 },
 	},
-	formatting = lsp_zero.cmp_format(),
+	formatting = lsp_zero.cmp_format({}),
 	mapping = cmp.mapping.preset.insert({
 		["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 		["<C-n>"] = cmp.mapping.select_next_item(cmp_select),

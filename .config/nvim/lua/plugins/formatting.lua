@@ -13,8 +13,8 @@ return {
 				go = { "gopls" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
-				javascript = { { "prettierd", "prettier" } },
-				json = { { "jq" } },
+				javascript = { "prettierd", "prettier" },
+				json = { "jq" },
 				sql = { "pg_format" },
 			},
 			format_on_save = function(bufnr)
@@ -26,7 +26,7 @@ return {
 					-- Async false is the default, but set this explicitly because async will make your life very hard.
 					async = false,
 					timeout_ms = 500,
-					lsp_fallback = true,
+					lsp_format = "fallback",
 				}
 			end,
 			formatters = {

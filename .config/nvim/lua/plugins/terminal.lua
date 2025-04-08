@@ -10,14 +10,14 @@ return {
 			})
 			local Terminal = require("toggleterm.terminal").Terminal
 
-			-- lazygit terminal bound to \-g
-			local lazygit = Terminal:new({
-				cmd = "lazygit",
-				hidden = true,
-			})
-			vim.keymap.set("n", "\\g", function()
-				lazygit:toggle()
-			end, { noremap = true, silent = true })
+			-- -- lazygit terminal bound to \-g
+			-- local lazygit = Terminal:new({
+			-- 	cmd = "lazygit",
+			-- 	hidden = true,
+			-- })
+			-- vim.keymap.set("n", "\\g", function()
+			-- 	lazygit:toggle()
+			-- end, { noremap = true, silent = true })
 
 			-- sql terminal bound to \-s
 			local sql = Terminal:new({

@@ -228,40 +228,7 @@ return {
 				},
 			})
 		end,
-		keys = {
-			{
-				"<D-o>",
-				function()
-					require("telescope.builtin").find_files()
-				end,
-				mode = "n",
-				desc = "Open fuzzy file finder in Telescope",
-			},
-			{
-				"<S-D-o>",
-				function()
-					require("telescope.builtin").buffers()
-				end,
-				mode = "n",
-				desc = "Open buffers list in Telescope",
-			},
-			{
-				"<S-D-f>",
-				function()
-					require("telescope.builtin").live_grep()
-				end,
-				mode = "n",
-				desc = "Search across the workspace in Telescope",
-			},
-			{
-				"<D-p>",
-				function()
-					require("telescope.builtin").lsp_dynamic_workspace_symbols()
-				end,
-				mode = "n",
-				desc = "Find an LSP symbol across the workspace in Telescope",
-			},
-		},
+		keys = {},
 	},
 	{
 		"RRethy/vim-illuminate",
@@ -320,6 +287,107 @@ return {
 			search = {
 				-- NOTE: This is a ripgrep regex.
 				pattern = [[\b(KEYWORDS)(\(.*\))*:]],
+			},
+		},
+	},
+	{
+		"folke/snacks.nvim",
+		opts = {
+			picker = {
+				layout = {
+					preset = "select",
+				},
+				formatters = {
+					file = {
+						filename_first = true, -- display filename before the file path
+					},
+				},
+			},
+		},
+		keys = {
+			{
+				"<D-o>",
+				function()
+					require("snacks").picker.files({
+						preset = "select",
+					})
+				end,
+				mode = "n",
+				desc = "Open fuzzy file finder in Telescope",
+			},
+			{
+				"<S-D-f>",
+				function()
+					require("snacks").picker.grep({
+						layout = "vertical",
+					})
+				end,
+				mode = "n",
+				desc = "Search across the workspace in Telescope",
+			},
+			{
+				"<S-D-o>",
+				function()
+					require("snacks").picker.buffers({
+						preset = "select",
+						win = {
+							input = {
+								keys = {
+									["<c-x>"] = { "bufdelete", mode = { "n", "i" } },
+								},
+							},
+							list = { keys = { ["dd"] = "bufdelete" } },
+						},
+					})
+				end,
+				mode = "n",
+				desc = "Open buffers list in Telescope",
+			},
+			{
+				"<D-p>",
+				function()
+					require("snacks").picker.lsp_workspace_symbols({
+						preset = "select",
+					})
+				end,
+				mode = "n",
+				desc = "Find an LSP symbol across the workspace in Telescope",
+			},
+			{
+				"<S-D-p>",
+				function()
+					require("snacks").picker.lsp_symbols({
+						layout = "vscode",
+						focus = "list",
+						filter = {
+							go = {
+								"Class",
+								"Constructor",
+								"Enum",
+								-- "Field",
+								"Function",
+								"Interface",
+								"Method",
+								"Module",
+								"Namespace",
+								"Package",
+								-- "Property",
+								"Struct",
+								"Trait",
+							},
+						},
+					})
+				end,
+				mode = "n",
+				desc = "Find an LSP symbol across the workspace in Telescope",
+			},
+			{
+				"\\g",
+				function()
+					require("snacks").lazygit.open()
+				end,
+				mode = "n",
+				desc = "Open LazyGit",
 			},
 		},
 	},

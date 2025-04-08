@@ -32,16 +32,8 @@ function M.maker()
 		originalEntryTable.display = function(entry)
 			local kind_and_higr = symbol_to_icon_map[entry.symbol_type:lower()]
 				or { icon = " ", hi = "TelescopeResultsNormal" }
-			local dot_idx = entry.symbol_name:reverse():find("%.") or entry.symbol_name:reverse():find("::")
-			local symbol, qualifiier
-
-			if dot_idx == nil then
-				symbol = entry.symbol_name
-				qualifiier = require("telescope.utils").transform_path({}, entry.filename)
-			else
-				symbol = entry.symbol_name:sub(1 - dot_idx)
-				qualifiier = entry.symbol_name:sub(1, #entry.symbol_name - #symbol - 1)
-			end
+			local symbol = entry.symbol_name
+			local qualifiier = require("telescope.utils").transform_path({}, entry.filename)
 
 			return displayer({
 				{ kind_and_higr.icon, kind_and_higr.hi },

@@ -10,16 +10,16 @@ lsp_zero.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
 	vim.keymap.set("n", "gd", function()
-		-- go to definition
+		-- Go to definition
 		vim.lsp.buf.definition()
 	end, opts)
 	vim.keymap.set("n", "<leader>fr", function()
-		-- find all references
-		require("trouble").toggle("lsp_references")
+		-- Find all references
+		vim.lsp.buf.references()
 	end, opts)
 	vim.keymap.set("n", "<leader>fi", function()
 		-- Find all implementations
-		require("trouble").toggle("lsp_implementations")
+		vim.lsp.buf.implementation()
 	end, opts)
 	vim.keymap.set("n", "gD", "<CMD>Glance definitions<CR>")
 	vim.keymap.set("n", "gR", "<CMD>Glance references<CR>")

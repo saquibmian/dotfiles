@@ -12,5 +12,9 @@ if status is-interactive
     eval (/opt/homebrew/bin/brew shellenv)
 end
 
-bind \cf project
-bind \co project_vim
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+
+# Created by `pipx` on 2025-04-15 16:52:41
+fish_add_path ~/.local/bin

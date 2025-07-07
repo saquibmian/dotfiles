@@ -1,0 +1,119 @@
+# -----------------------------------------------------------------------------
+# Rose Pine Dawn
+# https://rosepinetheme.com/palette/ingredients/
+# -----------------------------------------------------------------------------
+#
+text: &text "#2c363c"
+base: &base "#f0edec"
+
+overlay: &overlay "#cbd9e3"
+overlayFg: &overlayFg "#556570"
+purple: &purple "#9893a5"
+beige: &beige "#D6CDC9"
+red: &red "#b4637a"
+green: &green "palegreen"
+brown: &brown "#6a5549"
+
+# Skin...
+k9s:
+  # General K9s styles
+  body:
+    fgColor: *text
+    bgColor: *base
+    logoColor: *brown
+  # Command prompt styles
+  prompt:
+    fgColor: *text
+    bgColor: *base
+    border:
+      command: *purple
+      default: *overlay
+    suggestColor: *brown
+  # ClusterInfoView styles.
+  info:
+    fgColor: *brown
+    sectionColor: *beige
+    memColor: *overlayFg
+    cpuColor: *overlayFg
+    k9sRevColor: *overlayFg
+  # Dialog styles.
+  dialog:
+    fgColor: *text
+    bgColor: *base
+    buttonFgColor: *text
+    buttonBgColor: *brown
+    buttonFocusFgColor: *text
+    buttonFocusBgColor: *overlay
+    labelFgColor: *brown
+    fieldFgColor: *text
+  frame:
+    border: # border around the frame
+      fgColor: *text
+      focusColor: *overlay
+    menu: # actions menu above frame
+      fgColor: *brown
+      fgStyle: bold
+      keyColor: *beige
+      numKeyColor: *beige
+    crumbs: # crumbs view below frame
+      fgColor: *text
+      bgColor: *beige
+      activeColor: *overlay
+    status:
+      # TODO: Fix this, we have a patch locally
+      newColor: *beige # this is actually the "selected" color, and the color of non-selected fg
+      modifyColor: *brown
+      addColor: *green
+      pendingColor: *purple
+      errorColor: *red
+      highlightColor: yellow # FIXME: what is this?
+      killColor: *beige
+      completedColor: *beige
+    title: # frame border title
+      fgColor: *text # resource type
+      bgColor: *overlay # resource type
+      highlightColor: *brown # resource name
+      counterColor: *purple # resource count
+      filterColor: *purple # resource filter
+  views:
+    # Charts skins...
+    charts:
+      bgColor: default
+      defaultDialColors:
+        - *beige
+        - *red
+      defaultChartColors:
+        - *beige
+        - *red
+    # TableView attributes.
+    table:
+      fgColor: *text
+      bgColor: *base
+      cursorBgColor: *beige
+      cursorFgColor: *text
+      markColor: *green
+      header:
+        fgColor: *text
+        bgColor: *base
+        sorterColor: *overlayFg
+    # Xray view attributes.
+    xray:
+      fgColor: *text
+      bgColor: *base
+      cursorColor: *overlay
+      graphicColor: *beige
+      showIcons: false
+    # YAML info styles.
+    yaml:
+      keyColor: *purple
+      colonColor: *purple
+      valueColor: *text
+    # Logs styles.
+    logs:
+      fgColor: *text
+      bgColor: *base
+      indicator: # this is the log table highlighted heading
+        fgColor: *text
+        bgColor: *beige
+        toggleOnColor: *green
+        toggleOffColor: *red

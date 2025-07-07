@@ -1,0 +1,10 @@
+k9s:
+  ui:
+    skin: zenbones-light
+    enableMouse: false
+    headless: true
+    logoless: true
+    crumbsless: false
+    reactive: true
+    noIcons: false
+    defaultsToFullScreen: false

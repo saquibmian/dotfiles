@@ -2,6 +2,7 @@ return {
 	{
 		-- File icons :)
 		"nvim-tree/nvim-web-devicons",
+		lazy = false,
 	},
 	{
 		"folke/zen-mode.nvim",
@@ -12,41 +13,34 @@ return {
 		},
 	},
 	{
-		-- My main file tree. Shows the file tree, but can also toggle showing open buffers by <S-b>.
-		"nvim-tree/nvim-tree.lua",
-		lazy = false,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		keys = {
-			{
-				"<leader>pv",
-				function()
-					vim.cmd.NvimTreeFindFileToggle()
-				end,
-				mode = "n",
-				desc = "Toggle NvimTree",
+		"stevearc/oil.nvim",
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {
+			view_options = {
+				show_hidden = true,
 			},
 		},
-		config = function()
-			require("nvim-tree").setup({
-				diagnostics = {
-					enable = true,
-					show_on_dirs = true,
-				},
-				sort = {
-					sorter = "case_sensitive",
-				},
-				view = {
-					width = 45,
-				},
-				renderer = {
-					group_empty = true,
-					highlight_diagnostics = true,
-				},
-				filters = {
-					dotfiles = false,
-				},
-			})
-		end,
+		-- Optional dependencies
+		-- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+		lazy = false,
+		keys = {
+			{
+				"-",
+				function()
+					require("oil").open()
+				end,
+				mode = "n",
+				desc = "Open Oil",
+			},
+		},
+	},
+	{
+		"JezerM/oil-lsp-diagnostics.nvim",
+		dependencies = { "stevearc/oil.nvim" },
+		opts = {},
 	},
 	{
 		"nvim-lualine/lualine.nvim",
@@ -58,7 +52,12 @@ return {
 			},
 			sections = {
 				lualine_a = {
-					"mode",
+					{
+						"mode",
+						fmt = function(str)
+							return str:sub(1, 1)
+						end,
+					},
 				},
 				lualine_b = {
 					"diagnostics",
@@ -95,6 +94,7 @@ return {
 				},
 			},
 			extensions = {
+				"oil",
 				"nvim-tree",
 				"nvim-dap-ui",
 			},
@@ -334,6 +334,14 @@ return {
 				end,
 				mode = "n",
 				desc = "Open LazyGit",
+			},
+			{
+				"\\S",
+				function()
+					require("snacks").scratch.open({})
+				end,
+				mode = "n",
+				desc = "Open Scratch buffer",
 			},
 		},
 	},

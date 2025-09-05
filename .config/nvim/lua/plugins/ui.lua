@@ -20,6 +20,9 @@ return {
 			view_options = {
 				show_hidden = true,
 			},
+			win_options = {
+				signcolumn = "yes:2",
+			},
 		},
 		-- Optional dependencies
 		-- dependencies = { { "echasnovski/mini.icons", opts = {} } },
@@ -41,6 +44,11 @@ return {
 		"JezerM/oil-lsp-diagnostics.nvim",
 		dependencies = { "stevearc/oil.nvim" },
 		opts = {},
+	},
+	{
+		"refractalize/oil-git-status.nvim",
+		dependencies = { "stevearc/oil.nvim" },
+		config = true,
 	},
 	{
 		"nvim-lualine/lualine.nvim",

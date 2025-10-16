@@ -247,9 +247,6 @@ return {
 		"folke/snacks.nvim",
 		opts = {
 			picker = {
-				layout = {
-					preset = "select",
-				},
 				formatters = {
 					file = {
 						filename_first = true, -- display filename before the file path
@@ -263,7 +260,7 @@ return {
 				"<D-o>",
 				function()
 					require("snacks").picker.files({
-						preset = "select",
+						layout = "select",
 					})
 				end,
 				mode = "n",
@@ -283,7 +280,7 @@ return {
 				"<S-D-o>",
 				function()
 					require("snacks").picker.buffers({
-						preset = "select",
+						layout = "select",
 						win = {
 							input = {
 								keys = {
@@ -301,7 +298,7 @@ return {
 				"<D-p>",
 				function()
 					require("snacks").picker.lsp_workspace_symbols({
-						preset = "select",
+						layout = "select",
 					})
 				end,
 				mode = "n",
@@ -351,6 +348,15 @@ return {
 				mode = "n",
 				desc = "Open Scratch buffer",
 			},
+		},
+	},
+	{
+		"catgoose/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
 		},
 	},
 }

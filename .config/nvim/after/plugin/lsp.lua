@@ -64,6 +64,9 @@ require("mason-lspconfig").setup({
 		"omnisharp",
 		"svelte",
 		"lua_ls",
+		"omnisharp",
+		"rust_analyzer",
+		"svelte",
 	},
 	handlers = {
 		lsp_zero.default_setup,
@@ -72,7 +75,9 @@ require("mason-lspconfig").setup({
 			require("lspconfig").lua_ls.setup(lua_opts)
 		end,
 		buf_ls = function()
-			require("lspconfig").buf_ls.setup({})
+			require("lspconfig").buf_ls.setup({
+				cmd = { "/Users/saquib/dev/buf/buf", "lsp", "serve", "--timeout=0", "--log-format=text", "--debug" },
+			})
 		end,
 		rust_analyzer = function()
 			-- We disable the `neovim/lspconfig`'s rust_analyzer config because we have rustaceanim installed,

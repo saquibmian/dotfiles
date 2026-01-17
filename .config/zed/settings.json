@@ -7,17 +7,29 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-opus-4.5"
+    },
+    "model_parameters": []
+  },
   "tab_bar": {
     "show": true
   },
-  "theme": "Atelier Forest Light",
+  "theme": "One Light",
   "ui_font_size": 13,
   "buffer_font_size": 13,
   "buffer_font_family": "SF Mono",
   // VIM-mode specific settings
   "vim_mode": true,
   "cursor_blink": false,
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
   "scrollbar": { "show": "never" },
   "vertical_scroll_margin": 0
 }

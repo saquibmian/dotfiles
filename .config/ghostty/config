@@ -1,0 +1,6 @@
+theme = dark:Nord,light:Zenbones
+shell-integration = fish
+font-family = SF Mono
+font-size = 12
+font-feature = -calt
+

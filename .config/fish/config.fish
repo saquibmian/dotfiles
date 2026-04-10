@@ -11,6 +11,9 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 if status is-interactive
     # Commands to run in interactive sessions can go here
     eval (/opt/homebrew/bin/brew shellenv)
+
+    # https://direnv.net/docs/hook.html#fish
+    command -q direnv; and direnv hook fish | source
 end
 
 # Added by OrbStack: command-line tools and integration

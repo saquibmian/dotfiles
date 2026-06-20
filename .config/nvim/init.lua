@@ -4,8 +4,8 @@ vim.g.maplocalleader = " "
 
 vim.opt.showmode = false
 
-vim.opt.nu = true             -- Enable line numbers
-vim.opt.relativenumber = true -- Enable relative line numbers.
+vim.opt.nu = true -- Enable line numbers
+-- vim.opt.relativenumber = true -- Enable relative line numbers.
 
 -- All 4 of these options are set together. For your sanity, the first three should match.
 vim.opt.tabstop = 2
@@ -263,6 +263,8 @@ end, { noremap = true, silent = true })
 local treesitter = require("nvim-treesitter")
 local treesitter_languages = {
   "c",
+  "css",
+  "html",
   "lua",
   "vim",
   "vimdoc",
@@ -271,6 +273,7 @@ local treesitter_languages = {
   "javascript",
   "typescript",
   "go",
+  "svelte",
 }
 treesitter.install(treesitter_languages)
 vim.api.nvim_create_autocmd("FileType", {
@@ -496,6 +499,7 @@ local lsp_settings = {
   },
   omnisharp = {},
   svelte = {},
+  ts_ls = {},
   yaml = {
     settings = {
       yaml = {
@@ -600,8 +604,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       for i = 97, 122 do -- a -> z
         table.insert(chars, string.char(i))
       end
-      table.insert(chars, ".") -- .
+      table.insert(chars, ".")
       table.insert(chars, "_")
+      if client.name == "svelte" or client.name == "html" then
+        table.insert(chars, "<")
+        table.insert(chars, ":")
+      end
       client.server_capabilities.completionProvider.triggerCharacters = chars
       vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
       vim.keymap.set("i", "<C-Space>", function()
@@ -644,7 +652,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     -- Custom keybindings
-    local opts = { buffer = args.data.buf, remap = false }
+    local opts = { buffer = args.buf, remap = false }
     vim.keymap.set("n", "gd", function()
       -- Go to definition
       vim.lsp.buf.definition()

@@ -4,6 +4,7 @@ vim.g.maplocalleader = " "
 
 vim.opt.showmode = false
 
+vim.opt.cursorline = true
 vim.opt.nu = true -- Enable line numbers
 -- vim.opt.relativenumber = true -- Enable relative line numbers.
 
@@ -405,6 +406,7 @@ vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
 
 -- LSP
 vim.diagnostic.config({
+  virtual_text = true,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "󰅚 ", -- x000f015a
@@ -514,6 +516,7 @@ local lsp_settings = {
           ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
           ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
           ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+          ["https://taskfile.dev/schema.json"] = "*.Taskfile.{yml,yaml}",
           ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] =
           "*gitlab-ci*.{yml,yaml}",
           ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] =

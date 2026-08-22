@@ -385,6 +385,8 @@ require("oil").setup({
 vim.keymap.set("n", "-", function()
   require("oil").open()
 end, { desc = "Open parent directory" })
+require("oil-lsp-diagnostics").setup()
+require("oil-git-status").setup()
 -- Smartsplits
 require("smart-splits").setup({})
 -- resizing splits

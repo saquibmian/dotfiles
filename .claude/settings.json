@@ -84,13 +84,27 @@
     "deny": [],
     "ask": []
   },
-  "model": "opus",
+  "model": "sonnet[1m]",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "theme": "auto",
   "feedbackSurveyState": {
     "lastShownTime": 1754332255376
-  },
-  "effortLevel": "medium"
+  }
 }
